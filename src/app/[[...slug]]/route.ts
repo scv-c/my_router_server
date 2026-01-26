@@ -36,7 +36,7 @@ async function handleRequest(req: NextRequest) {
 
     //Client IP 추출 (Vercel 환경 고려)
     // req.ip는 Next.js가 감지한 IP이며, 없으면 x-forwarded-for 헤더에서 가져옴
-    const clientIp = req.ip || req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
 
     // 표준 프록시 헤더 명시적 주입. [X-Forwarded-For: 클라이언트 IP (표준)] [X-Real-IP: Nginx 등에서 많이 쓰는 실제 IP 헤더]
     headers.set('X-Forwarded-For', clientIp);
