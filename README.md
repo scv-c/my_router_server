@@ -1,3 +1,5 @@
+[![Sync to Repo scv_router_server](https://github.com/scv-c/my_router_server/actions/workflows/sync.yml/badge.svg)](https://github.com/scv-c/my_router_server/actions/workflows/sync.yml)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
