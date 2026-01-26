@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Destination Repo (B)
         uses: actions/checkout@v4
         with:
-          repository: scv-c/scv-router-server # 👈 [수정필요] B 레포 주소 (예: gildong/project-b)
+          repository: scv-c/scvc_router_server # 👈 [수정필요] B 레포 주소 (예: gildong/project-b)
           token: ${{ secrets.DESTINATION_TOKEN }} # 아까 등록한 토큰 사용
           path: destination
 
