@@ -1,0 +1,44 @@
+name: Sync to Repo scv_router_server
+
+on:
+  push:
+    branches: [ "main" ] # main 브랜치에 푸시될 때 실행 (master라면 master로 수정)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 현재 C 레포의 코드를 내려받음
+      - name: Checkout Source Repo (C)
+        uses: actions/checkout@v4
+
+      # 2. 타겟 B 레포를 'destination' 폴더에 내려받음
+      - name: Checkout Destination Repo (B)
+        uses: actions/checkout@v4
+        with:
+          repository: scv-c/scv-router-server # 👈 [수정필요] B 레포 주소 (예: gildong/project-b)
+          token: ${{ secrets.DESTINATION_TOKEN }} # 아까 등록한 토큰 사용
+          path: destination
+
+      # 3. 파일 복사 (rsync 사용)
+      # .git 폴더와 github 워크플로우 파일은 제외하고 복사합니다.
+      - name: Copy files from C to B
+        run: |
+          rsync -av --delete --exclude='.git' --exclude='.github' --exclude='destination' ./ destination/
+
+      # 4. B 레포에 커밋하고 푸시
+      - name: Push to Destination Repo (B)
+        run: |
+          cd destination
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 변경사항이 있는지 확인
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Sync from Repo C: ${{ github.event.head_commit.message }}"
+            git push origin main # B 레포의 브랜치명 (main 또는 master)
+            echo "✅ 배포 완료!"
+          else
+            echo "변동 사항이 없습니다."
+          fi
