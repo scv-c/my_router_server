@@ -25,7 +25,7 @@ export class AppRouter {
     if (stripPath) {
       finalPath = pathname.replace(path, ''); // prefix 제거
     }
-    
+
     const portStr = targetPort ? `:${targetPort}` : '';
     // 이중 슬래시 방지
     const cleanPath = finalPath.startsWith('/') ? finalPath : `/${finalPath}`;
