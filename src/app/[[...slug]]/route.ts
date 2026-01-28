@@ -42,8 +42,6 @@ async function handleRequest(req: NextRequest) {
     headers.set('X-Forwarded-For', clientIp);
     headers.set('X-Real-IP', clientIp);
 
-    console.log(`실제 path : ${targetUrl}`);
-
     // 4. 실제 요청 전달 (Fetch)
     const response = await fetch(targetUrl, {
       method: req.method,
