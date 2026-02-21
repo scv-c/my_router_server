@@ -20,6 +20,8 @@ export class AppRouter {
   public buildTargetUrl(route: RouteConfig, pathname: string, searchParams: string): string {
     const { targetHost, targetPort, path, stripPath = true } = route;
     
+    console.log("search값:", searchParams);
+
     // 대상 경로 계산
     let finalPath = pathname;
     if (stripPath) {
