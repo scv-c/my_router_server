@@ -34,12 +34,6 @@ async function handleRequest(req: NextRequest) {
     const headers = new Headers(req.headers);
     headers.set('host', new URL(route.targetHost).host); 
 
-    headers.delete('x-invoke-path');
-    headers.delete('x-invoke-query');
-    headers.delete('x-middleware-invoke');
-    headers.delete('x-forwarded-host');
-    headers.delete('x-forwarded-proto');
-
     //Client IP 추출 (Vercel 환경 고려)
     // req.ip는 Next.js가 감지한 IP이며, 없으면 x-forwarded-for 헤더에서 가져옴
     const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
