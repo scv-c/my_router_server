@@ -14,6 +14,8 @@ const logger = Logger.getInstance();
 async function handleRequest(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
+  console.log(req.nextUrl);
+
   try {
     // 1. 라우트 매칭
     const route = router.findRoute(pathname);
