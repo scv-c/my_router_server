@@ -14,8 +14,6 @@ const logger = Logger.getInstance();
 async function handleRequest(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
-  console.log(req.nextUrl);
-
   try {
     // 1. 라우트 매칭
     const route = router.findRoute(pathname);
@@ -31,12 +29,14 @@ async function handleRequest(req: NextRequest) {
 
     // 3. Proxy 요청 구성
     const targetUrl = router.buildTargetUrl(route, pathname, req.nextUrl.search);
-    
-    console.log(targetUrl);
 
     // 헤더 복사 (Host 헤더 주의: 타겟 서버에 맞게 조정 필요할 수 있음)
     const headers = new Headers(req.headers);
     headers.set('host', new URL(route.targetHost).host); 
+
+    headers.delete('x-invoke-path');
+    headers.delete('x-invoke-query');
+    headers.delete('x-middleware-invoke');
 
     //Client IP 추출 (Vercel 환경 고려)
     // req.ip는 Next.js가 감지한 IP이며, 없으면 x-forwarded-for 헤더에서 가져옴
