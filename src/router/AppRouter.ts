@@ -32,6 +32,6 @@ export class AppRouter {
     // 이중 슬래시 방지
     const cleanPath = finalPath.startsWith('/') ? finalPath : `/${finalPath}`;
     
-    return `${targetHost}${portStr}${cleanPath}${searchParams ? `?${searchParams}` : ''}`;
+    return `${targetHost}${portStr}${cleanPath}${searchParams ? `${searchParams}` : ''}`;
   }
 }

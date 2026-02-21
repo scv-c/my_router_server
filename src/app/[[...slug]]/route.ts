@@ -32,6 +32,8 @@ async function handleRequest(req: NextRequest) {
     // 3. Proxy 요청 구성
     const targetUrl = router.buildTargetUrl(route, pathname, req.nextUrl.search);
     
+    console.log(targetUrl);
+
     // 헤더 복사 (Host 헤더 주의: 타겟 서버에 맞게 조정 필요할 수 있음)
     const headers = new Headers(req.headers);
     headers.set('host', new URL(route.targetHost).host); 
