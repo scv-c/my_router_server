@@ -29,6 +29,16 @@ export const routes: RouteConfig[] = [
     security: {
       enableIpWhitelist: false, // 보안 옵션 예시
     },
-  },
+  },  
+  {
+    path: '/webtoon',
+    targetHost: process.env.PERRAG_API_SERVICE_HOST || "",
+    targetPort: 8200,
+    // targetPort: parseInt(process.env.PERRAG_API_SERVICE_PORT || ''),
+    stripPath: true, // /blog 경로를 그대로 뒤단 서버로 넘길지 여부
+    security: {
+      enableIpWhitelist: false, // 보안 옵션 예시
+    }
+  },  
   // N개의 도메인 추가 가능...
 ];
