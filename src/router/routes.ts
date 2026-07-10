@@ -31,11 +31,11 @@ export const routes: RouteConfig[] = [
     },
   },  
   {
-    path: '/webtoon',
+    path: '/webtoon-studio',
     targetHost: process.env.PERRAG_API_SERVICE_HOST || "",
     targetPort: 8200,
     // targetPort: parseInt(process.env.PERRAG_API_SERVICE_PORT || ''),
-    stripPath: true, // /blog 경로를 그대로 뒤단 서버로 넘길지 여부
+    stripPath: false, // /blog 경로를 그대로 뒤단 서버로 넘길지 여부
     security: {
       enableIpWhitelist: false, // 보안 옵션 예시
     }
