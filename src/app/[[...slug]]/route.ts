@@ -30,6 +30,12 @@ async function handleRequest(req: NextRequest) {
     // 3. Proxy 요청 구성
     const targetUrl = router.buildTargetUrl(route, pathname, req.nextUrl.search);
 
+    // 3-1. 리다이렉트 라우트: 프록시 대신 대상 URL 로 보냄 (WebSocket 등 fetch 로 못 넘기는 서비스)
+    if (route.redirect) {
+      logger.log(req, 307);
+      return NextResponse.redirect(targetUrl, 307);
+    }
+
     // 헤더 복사 (Host 헤더 주의: 타겟 서버에 맞게 조정 필요할 수 있음)
     const headers = new Headers(req.headers);
     headers.set('host', new URL(route.targetHost).host); 

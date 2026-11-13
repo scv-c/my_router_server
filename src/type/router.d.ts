@@ -12,6 +12,7 @@ export interface RouteConfig {
   targetHost: string;    // 대상 호스트 (예: http://my-home.ddns.net)
   targetPort?: number;   // 대상 포트
   stripPath?: boolean;   // 경로 제거 여부 (기본 true)
+  redirect?: boolean;    // true 면 프록시 대신 대상 URL 로 307 리다이렉트 (WebSocket 등 fetch 로 못 넘기는 서비스)
   security?: SecurityOptions; // 2-4-1-2. 보안 확장 설정
 }
 

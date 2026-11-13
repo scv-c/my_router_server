@@ -40,5 +40,17 @@ export const routes: RouteConfig[] = [
       enableIpWhitelist: false, // 보안 옵션 예시
     }
   },  
+  {
+    // 토끼 마법대전 게임 서버: WebSocket 은 fetch 프록시로 못 넘기므로 게임 서버 주소로 리다이렉트
+    // /mr → 게임 서버 / → 게임 서버가 /arena/ 로 보냄, /mr/arena/... → /arena/...
+    path: '/mr',
+    targetHost: process.env.PERRAG_API_SERVICE_HOST || "",
+    targetPort: 8700,
+    stripPath: true, // /mr 을 떼고 넘김
+    redirect: true,
+    security: {
+      enableIpWhitelist: false, // 보안 옵션 예시
+    }
+  },
   // N개의 도메인 추가 가능...
 ];
