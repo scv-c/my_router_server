@@ -41,7 +41,7 @@ export const routes: RouteConfig[] = [
     }
   },  
   {
-    // 토끼 마법대전 게임 서버: WebSocket 은 fetch 프록시로 못 넘기므로 게임 서버 주소로 리다이렉트
+    // 토끼 마법대전 게임 서버: WebSocket 은 fetch 프록시로 못 넘기므로 게임 서버 주소로 리다이렉트 (예: /mr → http://<게임 서버>:8700/)
     // /mr → 게임 서버 / → 게임 서버가 /arena/ 로 보냄, /mr/arena/... → /arena/...
     path: '/mr',
     targetHost: process.env.PERRAG_API_SERVICE_HOST || "",
