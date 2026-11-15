@@ -41,11 +41,10 @@ export const routes: RouteConfig[] = [
     }
   },  
   {
-    // 토끼 마법대전 게임 서버: WebSocket 은 fetch 프록시로 못 넘기므로 게임 서버 주소로 리다이렉트 (예: /mr → http://<게임 서버>:8700/)
-    // /mr → 게임 서버 / → 게임 서버가 /arena/ 로 보냄, /mr/arena/... → /arena/...
+    // 난장판 대전(CRAZY BRAWL) 게임 서버: WebSocket 은 fetch 프록시로 못 넘기므로 게임 도메인으로 리다이렉트
+    // /mr → https://crazybrawl.com/ → 게임 서버가 /arena/ 로 보냄, /mr/arena/... → /arena/...
     path: '/mr',
-    targetHost: process.env.PERRAG_API_SERVICE_HOST || "",
-    targetPort: 8700,
+    targetHost: 'https://crazybrawl.com',
     stripPath: true, // /mr 을 떼고 넘김
     redirect: true,
     security: {
